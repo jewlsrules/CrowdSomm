@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/jewlsrules/CrowdSomm#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "bcrypt": "^3.0.7",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.8.3"
   }
 }

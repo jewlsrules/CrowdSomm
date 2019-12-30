@@ -3,6 +3,10 @@
 //----------------------
 const express = require('express');
 const app = express();
+const methodOverride = require('method-override') //convert strings in forms
+const mongoose = require('mongoose') //for database
+const session = require('express-session') //for cookies
+const bcrypt = require('bcrypt') //for password encryption
 
 //----------------------
 //PORT
