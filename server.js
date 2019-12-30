@@ -77,7 +77,7 @@ app.use('/users', usersController)
 //
 //basic route
 app.get('/' , (req, res) => {
-  res.send('working!')
+  res.render('home.ejs')
 });
 
 
