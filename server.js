@@ -33,29 +33,29 @@ db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
 db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
 db.on('disconnected', () => console.log('mongo disconnected'));
 
-//----------------------
+// ----------------------
 // Middleware
-//----------------------
-// //setting up cookies
-// app.use(session({
-//   //random string
-//   secret:'onetwofreddyscomingforyou',
-//   //dont worry about why this is false, just set it false
-//   resave:false,
-//   //dont worry about why this is false, just set it false
-//   saveUninitialized:false
-// }))
-//
-// //use public folder for static assets
-// app.use(express.static('public'));
-//
-// // populates req.body with parsed info from forms - if no data from forms will return an empty object {}
-// app.use(express.urlencoded({ extended: true }));// extended: false - does not allow nested objects in query strings
-// // app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project - THIS IS FOR APIS
-//
-// //use method override
-// app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
-//
+// ----------------------
+//setting up cookies
+app.use(session({
+  //random string
+  secret:'onetwofreddyscomingforyou',
+  //dont worry about why this is false, just set it false
+  resave:false,
+  //dont worry about why this is false, just set it false
+  saveUninitialized:false
+}))
+
+//use public folder for static assets
+app.use(express.static('public'));
+
+// populates req.body with parsed info from forms - if no data from forms will return an empty object {}
+app.use(express.urlencoded({ extended: true }));// extended: false - does not allow nested objects in query strings
+app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project - THIS IS FOR APIS
+
+//use method override
+app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
+
 // //----------------------
 // // Controllers
 // //----------------------
