@@ -8,6 +8,9 @@ const mongoose = require('mongoose') //for database
 const session = require('express-session') //for cookies
 const bcrypt = require('bcrypt') //for password encryption
 
+const db = mongoose.connection
+require('dotenv').config()
+
 //----------------------
 //PORT
 //----------------------
@@ -17,18 +20,18 @@ const PORT = process.env.PORT
 //----------------------
 // Database
 //----------------------
-// // How to connect to the database either via heroku or locally
-// const MONGODB_URI = process.env.MONGODB_URI
-//
-// // Connect to Mongo &
-// // Fix Depreciation Warnings from Mongoose
-// // May or may not need these depending on your Mongoose version
-// mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
-//
-// // Error / success
-// db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
-// db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
-// db.on('disconnected', () => console.log('mongo disconnected'));
+// How to connect to the database either via heroku or locally
+const MONGODB_URI = process.env.MONGODB_URI
+
+// Connect to Mongo &
+// Fix Depreciation Warnings from Mongoose
+// May or may not need these depending on your Mongoose version
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+
+// Error / success
+db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
+db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
+db.on('disconnected', () => console.log('mongo disconnected'));
 
 //----------------------
 // Middleware
@@ -81,4 +84,4 @@ app.get('/' , (req, res) => {
 //----------------------
 // Listener
 //----------------------
-app.listen(3000, () => console.log( 'Listening on port:', 3000));
+app.listen(PORT, () => console.log( 'Listening on port:', PORT));
