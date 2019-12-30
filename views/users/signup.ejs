@@ -4,13 +4,30 @@
     <%- include ('../partials/header.ejs') %>
   </head>
   <body>
-    <h1>Create an Account</h1>
-    <%- include ('../partials/hello.ejs') %>
 
-    <% if(3 > 2) { %>
-      <h3>ejs is working</h3>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">CrowdSomm</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="#">Features</a>
+          <a class="nav-item nav-link" href="#">Pricing</a>
+          <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </div>
+      </div>
+    </nav>
 
-    <% } %>
+    <h1>Welcome to CrowdSomm</h1>
+
+    <h3>"What would you suggest?"</h3>
+    <p>CrowdSomm collects reviews of individual dishes and drinks from your favorite restaurants to help others decide what to order</p>
+    <div class='signuplogin'>
+      <a href="#">Sign Up</a><br>
+      <a href="#">Log In</a>
+    </div>
 
     <%- include ('../partials/jquery.ejs') %>
   </body>

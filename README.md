@@ -11,9 +11,7 @@ CrowdSomm aims to get feedback from restaurant patrons about the dishes and drin
 - JavaScript
 - JQuery
 - Bootstrap
-- C#
-- PHP
-- PostgreSQL
+- MongoDB Atlas
 
 ## Approach
 
