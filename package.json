@@ -1,0 +1,22 @@
+{
+  "name": "crowdsomm",
+  "version": "1.0.0",
+  "description": "CrowdSomm.com - A crowdsourced answer to the question \"So what's good here?\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jewlsrules/CrowdSomm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jewlsrules/CrowdSomm/issues"
+  },
+  "homepage": "https://github.com/jewlsrules/CrowdSomm#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
