@@ -95,6 +95,7 @@ app.get('/' , (req, res) => {
     console.log(e);
   });
   res.render('home.ejs', {
+    user: req.session.username,
     business: business
   })
 });
