@@ -82,16 +82,21 @@ app.use('/users', usersController)
 // //----------------------
 //
 //basic route
+let businessid
+
 app.get('/' , (req, res) => {
   client.search({
     term: 'Wurskuche',
     location: 'los angeles, ca',
   }).then(response => {
     console.log(response.jsonBody.businesses[0].id);
+    businessid = response.jsonBody.businesses[0].id
   }).catch(e => {
     console.log(e);
   });
-  res.render('home.ejs')
+  res.render('home.ejs', {
+    bus_id: businessid
+  })
 });
 
 
