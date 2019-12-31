@@ -18,18 +18,18 @@ router.get('/signup', (req, res) => {
 }) // end of show sign up page
 
 // //create new user route
-// router.post('/', (req, res) => {
-//   // encrypt the password before passing it into the new user object
-//   req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-//   User.create(req.body, (error, createdUser) => {
-//     // set the cookie so that we know the user is logged in
-//     req.session.username = createdUser.username
-//     console.log('created user.id: ', createdUser.id)
-//     console.log('req.session: ', req.session)
-//     //bring the new user to the main page
-//     res.redirect('/projects')
-//   })
-// }) // end of create new user route
+router.post('/', (req, res) => {
+  // encrypt the password before passing it into the new user object
+  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+  User.create(req.body, (error, createdUser) => {
+    // set the cookie so that we know the user is logged in
+    req.session.username = createdUser.username
+    console.log('created user.id: ', createdUser.id)
+    console.log('req.session: ', req.session)
+    //bring the new user to the main page
+    res.redirect('/')
+  })
+}) // end of create new user route
 //
 // // Show Edit Page
 // router.get('/:id/edit', (req, res) => {
@@ -62,10 +62,10 @@ router.get('/signup', (req, res) => {
 //       })
 // }) // end of edit action route
 //
-// //homepage
-// router.get('/', (req, res) => {
-//   res.redirect('/projects/all')
-// })
+//homepage
+router.get('/', (req, res) => {
+  res.redirect('/')
+})
 //
 // //show user's page
 // router.get('/:id', (req, res) => {
