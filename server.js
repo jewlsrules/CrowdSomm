@@ -84,10 +84,10 @@ app.use('/users', usersController)
 //basic route
 app.get('/' , (req, res) => {
   client.search({
-    term: 'Four Barrel Coffee',
-    location: 'san francisco, ca',
+    term: 'Wurskuche',
+    location: 'los angeles, ca',
   }).then(response => {
-    console.log(response.jsonBody.businesses[0].name);
+    console.log(response.jsonBody.businesses[0].id);
   }).catch(e => {
     console.log(e);
   });
