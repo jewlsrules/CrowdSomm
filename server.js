@@ -90,14 +90,14 @@ app.get('/' , (req, res) => {
     location: 'los angeles, ca',
   }).then(response => {
     console.log(response.jsonBody.businesses[0]);
-    business = response.jsonBody.businesses[0]
+    business = response.jsonBody.businesses[0];
+    res.render('home.ejs', {
+      user: req.session.username,
+      business: business
+    })
   }).catch(e => {
     console.log(e);
   });
-  res.render('home.ejs', {
-    user: req.session.username,
-    business: business
-  })
 });
 
 
