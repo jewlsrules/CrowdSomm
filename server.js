@@ -7,6 +7,7 @@ const methodOverride = require('method-override') //convert strings in forms
 const mongoose = require('mongoose') //for database
 const session = require('express-session') //for cookies
 const bcrypt = require('bcrypt') //for password encryption
+const yelp = require('yelp-fusion'); //for the yelp API to get businesses listed
 
 const db = mongoose.connection
 require('dotenv').config()
@@ -36,6 +37,11 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 // ----------------------
 // Middleware
 // ----------------------
+
+//yelp API
+const YELP_API_KEY = process.env.YELP_API_KEY
+const client = yelp.client(YELP_API_KEY)
+
 //setting up cookies
 app.use(session({
   //random string
@@ -77,6 +83,14 @@ app.use('/users', usersController)
 //
 //basic route
 app.get('/' , (req, res) => {
+  client.search({
+    term: 'Four Barrel Coffee',
+    location: 'san francisco, ca',
+  }).then(response => {
+    console.log(response.jsonBody.businesses[0].name);
+  }).catch(e => {
+    console.log(e);
+  });
   res.render('home.ejs')
 });
 
