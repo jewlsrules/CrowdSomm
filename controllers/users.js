@@ -14,7 +14,6 @@ const User = require('../models/user.js')
 //----------------------
 //show sign up page
 router.get('/signup', (req, res) => {
-  // res.send('this is the sign up page')
   res.render('users/signup.ejs')
 }) // end of show sign up page
 
