@@ -6,6 +6,10 @@
   <body>
     <%- include ('./partials/nav.ejs') %>
     <h3>This should be Wurskuche:</h3> <h1><%=business.name%></h1>
+    <br>
+    <% for (i in businesses){ %>
+      <h3><%=businesses[i].name%> - <%=businesses[i].location.address1%></h3>
+    <% } %>
     <%- include ('./partials/jquery.ejs') %>
   </body>
 </html>

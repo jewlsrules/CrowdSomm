@@ -83,13 +83,16 @@ app.use('/users', usersController)
 //
 //basic route
 let business
+let search_term = "Wurskuche"
+let location = 'los angeles, ca'
 
 app.get('/' , (req, res) => {
   client.search({
-    term: 'Wurskuche',
-    location: 'los angeles, ca',
+    term: search_term,
+    location: '90802',
   }).then(response => {
-    console.log(response.jsonBody.businesses[0]);
+    console.log(response.jsonBody.businesses);
+    businesses = response.jsonBody.businesses;
     business = response.jsonBody.businesses[0];
     res.render('home.ejs', {
       user: req.session.username,
