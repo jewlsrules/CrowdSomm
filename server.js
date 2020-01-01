@@ -86,6 +86,10 @@ let business
 let search_term = "Wurskuche"
 let location = 'los angeles, ca'
 
+app.post('/search', (req, res) => {
+  res.redirect('/')
+})
+
 app.get('/' , (req, res) => {
   client.search({
     term: search_term,
