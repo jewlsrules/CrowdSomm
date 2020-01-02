@@ -6,13 +6,18 @@
   <body>
     <%- include ('./partials/nav.ejs') %>
     <form action="/search" method="POST">
-      <h3>Search for a restaurant: </h3>
-      <input type="text" name="restaurant_search" />
+      <h3>Find a Restaurant: </h3>
+      <label for="restaurant_name">Name: </label>
+      <input type="text" name="restaurant_name" /><br>
+      <label for="restaurant_location">Zip or City, State:</label>
+      <input type="text" name="restaurant_location" /><br>
       <input type="submit" value="SEARCH">
     <br>
-    <% for(let i=0; i < 10; i++){ %>
-      <h3><%=businesses[i].name%></h3><p><%=businesses[i].location.address1%></p>
-    <% } %>
+    <% if(businesses){
+      for(let i=0; i < businesses.length; i++){ %>
+        <h3><%=businesses[i].name%></h3>
+
+    <% }} %>
     <%- include ('./partials/jquery.ejs') %>
   </body>
 </html>

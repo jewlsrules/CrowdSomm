@@ -81,35 +81,50 @@ app.use('/users', usersController)
 // // Routes
 // //----------------------
 //
-//basic route
-let business
-let search_term = " "
-let location = ' '
+
+let business = null
+let businesses = null
+//starting search name to null
+let search_term = null
+//starting search  location is null
+let location = null
 
 app.post('/search', (req, res) => {
-  console.log(req.body.restaurant_search)
-  search_term = req.body.restaurant_search
+  console.log(req.body.restaurant_name)
+  search_term = req.body.restaurant_name;
+  location = req.body.restaurant_location;
   res.redirect('/')
 })
 
 app.get('/' , (req, res) => {
-  client.search({
-    term: search_term,
-    location: '90802',
-  }).then(response => {
-    // console.log(response.jsonBody.businesses);
-    businesses = response.jsonBody.businesses;
-    business = response.jsonBody.businesses[0];
+  //if there isn't a search term entered, show nothing.
+  if(!search_term){
     res.render('home.ejs', {
       user: req.session.username,
-      business: business
-    })
-  }).catch(e => {
-    console.log(e);
-  });
+      businesses: null
+    });
+    //if there is a search term, show the
+  } else {
+    client.search({
+      term: search_term,
+      location: location,
+    }).then(response => {
+      // console.log(response.jsonBody.businesses);
+      businesses = response.jsonBody.businesses;
+      business = response.jsonBody.businesses[0];
+      console.log('list of businesses: ' , businesses);
+      res.render('home.ejs', {
+        user: req.session.username,
+        businesses: businesses,
+        business: business
+      })
+    }).catch(e => {
+      console.log(e);
+    });
+  }
 });
 
-
+// <h3><%=businesses[i].name%></h3><p><%=businesses[i].location.address1%></p>
 //----------------------
 // Listener
 //----------------------
