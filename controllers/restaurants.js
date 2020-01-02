@@ -8,10 +8,17 @@ const mongoose = require('mongoose') //for database
 const session = require('express-session') //for cookies
 const bcrypt = require('bcrypt') //for password encryption
 const User = require('../models/user.js')
+const yelp = require('yelp-fusion'); //for the yelp API to get businesses listed
+
+require('dotenv').config()
 
 //----------------------
 // Routes
 //----------------------
+
+const YELP_API_KEY = process.env.YELP_API_KEY
+const client = yelp.client(YELP_API_KEY)
+
 //show restaurants page
 router.get('/', (req, res) => {
   console.log('controller working');
@@ -22,10 +29,17 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   req.session.restuarant_id = req.params.id
-  res.render('restaurants/show.ejs', {
-    restaurant_id: req.session.restaurant_id,
-    user: req.session.username
-  })
+  console.log('id: ', req.params.id);
+  client.business(req.params.id)
+    .then(response => {
+    console.log(response.jsonBody.name);
+    res.render('restaurants/show.ejs', {
+      restaurant_name: response.jsonBody.name,
+      user: req.session.username
+    })
+  }).catch(e => {
+    console.log(e);
+  });
 })
 
 //----------------------

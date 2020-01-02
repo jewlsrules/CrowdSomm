@@ -12,6 +12,7 @@ CrowdSomm aims to get feedback from restaurant patrons about the dishes and drin
 - JQuery
 - Bootstrap
 - MongoDB Atlas
+- Yelp API - https://github.com/tonybadguy/yelp-fusion
 
 ## Approach
 
