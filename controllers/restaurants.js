@@ -20,6 +20,14 @@ router.get('/', (req, res) => {
   })
 }) // end of show sign up page
 
+router.get('/:id', (req, res) => {
+  req.session.restuarant_id = req.params.id
+  res.render('restaurants/show.ejs', {
+    restaurant_id: req.session.restaurant_id,
+    user: req.session.username
+  })
+})
+
 //----------------------
 // Export
 //----------------------
