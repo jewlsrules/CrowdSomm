@@ -87,6 +87,8 @@ let search_term = "Wurskuche"
 let location = 'los angeles, ca'
 
 app.post('/search', (req, res) => {
+  console.log(req.body.restaurant_search)
+  search_term = req.body.restaurant_search
   res.redirect('/')
 })
 
@@ -95,7 +97,7 @@ app.get('/' , (req, res) => {
     term: search_term,
     location: '90802',
   }).then(response => {
-    console.log(response.jsonBody.businesses);
+    // console.log(response.jsonBody.businesses);
     businesses = response.jsonBody.businesses;
     business = response.jsonBody.businesses[0];
     res.render('home.ejs', {
