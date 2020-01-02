@@ -31,16 +31,42 @@ router.post('/', (req, res) => {
   })
 }) // end of create new user route
 
+let invalid
+
 // Show Log In Page
 router.get('/login', (req, res) => {
   if(!req.session.username){
     res.render('users/login.ejs', {
-      user: req.session.username
+      user: req.session.username,
+      invalid: invalid
     })
   } else {
     res.redirect('/')
   }
 }) // end of show log in page
+
+// Log In route
+router.post('/login', (req, res)=>{
+  console.log('logging in:', req.body);
+  User.findOne({username: req.body.login_username}, (error, foundUser) => {
+    if(foundUser === null){
+      invalid = true;
+      res.redirect('/users/login')
+    } else {
+      const doesPasswordMatch = bcrypt.compareSync(req.body.login_password, foundUser.password)
+      if(doesPasswordMatch){
+        //if the password is correct, set a cookie of their username
+        // console.log("this is the log in post route, found user is : "+ foundUser);
+        req.session.username = foundUser.username
+        console.log('logged in user: ', req.session)
+        res.redirect('/')
+      } else {
+        invalid = true;
+        res.redirect('/users/login')
+      }
+    }
+  })
+}) // end of log in check route
 
 //
 // // Show Edit Page
