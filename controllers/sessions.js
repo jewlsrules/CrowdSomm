@@ -8,6 +8,7 @@ const mongoose = require('mongoose') //for database
 const session = require('express-session') //for cookies
 const bcrypt = require('bcrypt') //for password encryption
 const User = require('../models/user.js')
+const base_url = 'https://crowdsommphp.herokuapp.com/api/'
 
 invalid = false;
 

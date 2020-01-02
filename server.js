@@ -8,6 +8,7 @@ const mongoose = require('mongoose') //for database
 const session = require('express-session') //for cookies
 const bcrypt = require('bcrypt') //for password encryption
 const yelp = require('yelp-fusion'); //for the yelp API to get businesses listed
+const base_url = 'https://crowdsommphp.herokuapp.com/api/'
 
 const db = mongoose.connection
 require('dotenv').config()
