@@ -57,7 +57,7 @@ app.use(express.static('public'));
 
 // populates req.body with parsed info from forms - if no data from forms will return an empty object {}
 app.use(express.urlencoded({ extended: true }));// extended: false - does not allow nested objects in query strings
-app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project - THIS IS FOR APIS
+app.use(express.json());// returns middleware that only parses JSON  - THIS IS FOR APIS
 
 //use method override
 app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
@@ -65,10 +65,7 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 // //----------------------
 // // Controllers
 // //----------------------
-// // Projects controller
-// const patternsController = require('./controllers/projects.js');
-// app.use('/projects', patternsController)
-//
+
 // // Sessions controller
 // const sessionsController = require('./controllers/sessions.js');
 // app.use('/sessions', sessionsController)
@@ -77,14 +74,13 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 const usersController = require('./controllers/users.js');
 app.use('/users', usersController)
 
+//restaurants
 const restaurantsController = require('./controllers/restaurants.js');
-app.use('/restuarants', restaurantsController)
+app.use('/restaurants', restaurantsController)
 
-//
 // //----------------------
 // // Routes
 // //----------------------
-//
 
 let business = null
 let businesses = null

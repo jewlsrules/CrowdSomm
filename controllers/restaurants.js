@@ -12,9 +12,12 @@ const User = require('../models/user.js')
 //----------------------
 // Routes
 //----------------------
-//show sign up page
+//show restaurants page
 router.get('/', (req, res) => {
-  res.render('restaurants/restaurant.ejs')
+  console.log('controller working');
+  res.render('restaurants/restaurant.ejs', {
+    user: req.session.username
+  })
 }) // end of show sign up page
 
 //----------------------
