@@ -30,6 +30,18 @@ router.post('/', (req, res) => {
     res.redirect('/')
   })
 }) // end of create new user route
+
+// Show Log In Page
+router.get('/login', (req, res) => {
+  if(!req.session.username){
+    res.render('users/login.ejs', {
+      user: req.session.username
+    })
+  } else {
+    res.redirect('/')
+  }
+}) // end of show log in page
+
 //
 // // Show Edit Page
 // router.get('/:id/edit', (req, res) => {
