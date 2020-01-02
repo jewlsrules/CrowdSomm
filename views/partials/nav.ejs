@@ -8,8 +8,7 @@
       <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="#">Features</a>
       <% if(user) { %>
-        <p>Hi, <%= user %></p>
-        <a class="nav-item nav-link" href="#">My Profile</a>
+        <a class="nav-item nav-link" href="#">Hi, <%= user %>!</a>
       <% } else { %>
         <a class="nav-item nav-link" href="/users/login">Log In</a>
         <a class="nav-item nav-link" href="/users/signup">Sign Up</a>
