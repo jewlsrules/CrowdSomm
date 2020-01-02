@@ -15,7 +15,7 @@
     <br>
     <% if(businesses){
       for(let i=0; i < businesses.length; i++){ %>
-        <h3><%=businesses[i].name%></h3>
+        <h3><%=businesses[i].name%></h3><p><%=businesses[i].location.address1%></p>
 
     <% }} %>
     <%- include ('./partials/jquery.ejs') %>

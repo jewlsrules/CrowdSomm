@@ -84,35 +84,34 @@ app.use('/users', usersController)
 
 let business = null
 let businesses = null
-//starting search name to null
-let search_term = null
-//starting search  location is null
-let location = null
 
 app.post('/search', (req, res) => {
   console.log(req.body.restaurant_name)
-  search_term = req.body.restaurant_name;
-  location = req.body.restaurant_location;
+  //the search term and location is set as cookies
+  req.session.search_term = req.body.restaurant_name;
+  req.session.location = req.body.restaurant_location;
   res.redirect('/')
 })
 
 app.get('/' , (req, res) => {
+  console.log("search term cookie: ", req.session.search_term)
   //if there isn't a search term entered, show nothing.
-  if(!search_term){
+  if(!req.session.search_term){
     res.render('home.ejs', {
       user: req.session.username,
       businesses: null
     });
-    //if there is a search term, show the
+    //if there is a search term, show the restaurant list
   } else {
     client.search({
-      term: search_term,
-      location: location,
+      //use the cookies we set in the post above 
+      term: req.session.search_term,
+      location: req.session.location,
     }).then(response => {
       // console.log(response.jsonBody.businesses);
       businesses = response.jsonBody.businesses;
       business = response.jsonBody.businesses[0];
-      console.log('list of businesses: ' , businesses);
+      // console.log('req.session.search_term ' , req.session.search_term);
       res.render('home.ejs', {
         user: req.session.username,
         businesses: businesses,
@@ -124,7 +123,6 @@ app.get('/' , (req, res) => {
   }
 });
 
-// <h3><%=businesses[i].name%></h3><p><%=businesses[i].location.address1%></p>
 //----------------------
 // Listener
 //----------------------
