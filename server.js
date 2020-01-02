@@ -76,6 +76,10 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 // Users controller
 const usersController = require('./controllers/users.js');
 app.use('/users', usersController)
+
+const restaurantsController = require('./controllers/restaurants.js');
+app.use('/restuarants', restaurantsController)
+
 //
 // //----------------------
 // // Routes
@@ -86,7 +90,7 @@ let business = null
 let businesses = null
 
 app.post('/search', (req, res) => {
-  console.log(req.body.restaurant_name)
+  // console.log(req.body.restaurant_name)
   //the search term and location is set as cookies
   req.session.search_term = req.body.restaurant_name;
   req.session.location = req.body.restaurant_location;
@@ -104,7 +108,7 @@ app.get('/' , (req, res) => {
     //if there is a search term, show the restaurant list
   } else {
     client.search({
-      //use the cookies we set in the post above 
+      //use the cookies we set in the post above
       term: req.session.search_term,
       location: req.session.location,
     }).then(response => {
