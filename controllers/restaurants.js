@@ -35,6 +35,7 @@ router.get('/:id', (req, res) => {
     console.log(response.jsonBody.name);
     res.render('restaurants/show.ejs', {
       restaurant_name: response.jsonBody.name,
+      restaurant_address: response.jsonBody.location.address1,
       user: req.session.username
     })
   }).catch(e => {
