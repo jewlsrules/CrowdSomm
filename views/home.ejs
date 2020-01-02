@@ -10,7 +10,7 @@
       <input type="text" name="restaurant_search" />
       <input type="submit" value="SEARCH">
     <br>
-    <% for (i in businesses){ %>
+    <% for(let i=0; i < 10; i++){ %>
       <h3><%=businesses[i].name%> - <%=businesses[i].location.address1%></h3>
     <% } %>
     <%- include ('./partials/jquery.ejs') %>

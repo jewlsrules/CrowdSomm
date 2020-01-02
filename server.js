@@ -83,8 +83,8 @@ app.use('/users', usersController)
 //
 //basic route
 let business
-let search_term = "Wurskuche"
-let location = 'los angeles, ca'
+let search_term = " "
+let location = ' '
 
 app.post('/search', (req, res) => {
   console.log(req.body.restaurant_search)
