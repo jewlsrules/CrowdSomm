@@ -30,17 +30,6 @@ router.get('/', (req, res) => {
   })
 }) // end of show sign up page
 
-var options = {
-    uri: 'https://crowdsommphp.herokuapp.com/api/reviews',
-    qs: {
-        access_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
-    },
-    headers: {
-        'User-Agent': 'Request-Promise'
-    },
-    json: true // Automatically parses the JSON string in the response
-};
-
 router.get('/:id', (req, res) => {
   req.session.restuarant_id = req.params.id
   console.log('1. id: ', req.params.id);
@@ -51,7 +40,7 @@ router.get('/:id', (req, res) => {
       req.session.rest_name = response.jsonBody.name;
       req.session.address1 = response.jsonBody.location.address1
       //using the options from above, get the data from php backend
-      rp(options).then(function (repos) {
+      rp({uri: 'https://crowdsommphp.herokuapp.com/api/reviews/restid/'+req.params.id, json: true}).then(function (repos) {
         console.log('repos: ', repos); // Print the responses
         req.session.reviews = repos
       }).then(() => {
