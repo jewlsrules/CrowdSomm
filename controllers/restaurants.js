@@ -30,6 +30,7 @@ router.get('/', (req, res) => {
   })
 }) // end of show sign up page
 
+//show individual restaurant page
 router.get('/:id', (req, res) => {
   req.session.restuarant_id = req.params.id
   console.log('1. id: ', req.params.id);
@@ -56,8 +57,9 @@ router.get('/:id', (req, res) => {
       console.log("this is the error: ", e);
     });
     console.log('6. reviews cookie: ', req.session.reviews);
-})
+}) // end of show individual restaurant
 
+//show page for adding a new review
 router.get('/:id/newreview', (req, res) => {
   req.session.restuarant_id = req.params.id;
   client.business(req.params.id)
@@ -75,7 +77,11 @@ router.get('/:id/newreview', (req, res) => {
     }).catch(e => {
       console.log("this is the error: ", e);
     });
-})
+}) // end of new review show page
+
+router.post('/:id/newreview', (req, res) => {
+  res.redirect('/')
+});
 
 //----------------------
 // Export
