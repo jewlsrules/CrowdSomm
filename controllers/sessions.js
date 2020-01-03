@@ -18,7 +18,7 @@ invalid = false;
 
 // Show Log In Page
 router.get('/login', (req, res) => {
-  if(!req.session.username){
+  if(!req.session.user){
     res.render('sessions/login.ejs', {
       invalid: invalid
     })

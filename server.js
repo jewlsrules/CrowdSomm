@@ -99,7 +99,7 @@ app.get('/' , (req, res) => {
   //if there isn't a search term entered, show nothing.
   if(!req.session.search_term){
     res.render('home.ejs', {
-      user: req.session.username,
+      user: req.session.user,
       businesses: null
     });
     //if there is a search term, show the restaurant list
@@ -114,7 +114,7 @@ app.get('/' , (req, res) => {
       business = response.jsonBody.businesses[0];
       // console.log('req.session.search_term ' , req.session.search_term);
       res.render('home.ejs', {
-        user: req.session.username,
+        user: req.session.user,
         businesses: businesses,
         business: business
       })

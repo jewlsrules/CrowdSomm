@@ -8,11 +8,11 @@
     <h1> Add a new review for <%=restaurant_name%> </h1>
     <form action="/restaurants/<%=restaurant_id%>/newreview" method="post">
       <label for="dish_name">Dish Name:</label>
-      <input type="text" name="dish_name" /><br>
+      <input type="text" name="dish_name" required/><br>
       <label for="stars">Stars: </label>
-      <input type="range" name="points" min="0" max="5" /><br>
+      <input type="range" name="points" min="0" max="5" required /><br>
       <label for="review_text">Notes: </label>
-      <input type="text" name='review_text' /><br>
+      <input type="text" name='review_text' placeholder="optionsl"/><br>
       <input type="submit" value="Submit Review">
     </form>
   </body>

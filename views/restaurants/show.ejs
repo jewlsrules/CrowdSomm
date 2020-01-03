@@ -7,6 +7,11 @@
     <%- include ('../partials/nav.ejs') %>
     <h1> <%=restaurant_name%></h1>
     <h3> <%=restaurant_address%> </h3>
+    <div>
+      <% if(user){%>
+        <a href="/restaurants/<%=restaurant_id%>/newreview">Add New Review</a>
+      <% } %>
+    </div>
     <% if(reviews[0]){ %>
       <div>
         <% for(let i=0; i< reviews.length; i++){ %>
@@ -19,11 +24,6 @@
   <% } else { %>
     <div>
       <h4>No Reviews for dishes at <%=restaurant_name%> yet. </h4>
-    </div>
-    <div>
-      <% if(user){%>
-        <a href="/restaurants/<%=restaurant_id%>/newreview">Add New Review</a>
-      <% } %>
     </div>
   <% } %>
   </body>

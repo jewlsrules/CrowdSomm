@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
   User.create(req.body, (error, createdUser) => {
     // set the cookie so that we know the user is logged in
-    req.session.username = createdUser.username
+    req.session.user = createdUser
     console.log('created user.id: ', createdUser.id)
     console.log('req.session: ', req.session)
     //bring the new user to the main page
@@ -36,9 +36,10 @@ let invalid
 
 // Show Log In Page
 router.get('/login', (req, res) => {
-  if(!req.session.username){
+  console.log('req session user: ', req.session.user);
+  if(!req.session.user){
     res.render('users/login.ejs', {
-      user: req.session.username,
+      user: req.session.user,
       invalid: invalid
     })
   } else {
@@ -58,7 +59,7 @@ router.post('/login', (req, res)=>{
       if(doesPasswordMatch){
         //if the password is correct, set a cookie of their username
         // console.log("this is the log in post route, found user is : "+ foundUser);
-        req.session.username = foundUser.username
+        req.session.user = foundUser
         console.log('logged in user: ', req.session)
         res.redirect('/')
       } else {

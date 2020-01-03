@@ -26,7 +26,7 @@ const client = yelp.client(YELP_API_KEY)
 router.get('/', (req, res) => {
   console.log('controller working');
   res.render('restaurants/restaurant.ejs', {
-    user: req.session.username
+    user: req.session.user
   })
 }) // end of show sign up page
 
@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
           restaurant_name: req.session.restaurant.name,
           restaurant_address: req.session.restaurant.location[0],
           restaurant_id: req.session.restaurant.id,
-          user: req.session.username,
+          user: req.session.user,
           reviews: req.session.reviews
         })
       })
@@ -72,15 +72,43 @@ router.get('/:id/newreview', (req, res) => {
       res.render('restaurants/newreview.ejs', {
         restaurant_id: req.session.restuarant.id,
         restaurant_name: req.session.restaurant.name,
-        user: req.session.username,
+        user: req.session.user,
       })
     }).catch(e => {
       console.log("this is the error: ", e);
     });
 }) // end of new review show page
 
+let request1
+
 router.post('/:id/newreview', (req, res) => {
-  res.redirect('/')
+  console.log(req.body); //this returns an object based on the names of the inputs
+  request1 = {
+      method: 'POST',
+      uri: 'https://crowdsommphp.herokuapp.com/api/reviews',
+      body: {
+          user_id: req.session.user._id,
+          restaurant_id: req.params.id,
+          dish_name: req.body.dish_name,
+          dish_id: 4, //we need to change this!!
+          stars: 5,
+          review_text: req.body.review_text
+      },
+      json: true // Automatically stringifies the body to JSON
+  };
+  console.log(request1);
+  rp(request1)
+    .then(function (parsedBody) {
+      console.log('success! i think.');
+        // POST succeeded...
+    })
+    .then(() => {
+      res.redirect('/restaurants/'+req.params.id)
+    })
+    .catch(function (err) {
+      console.log('error: ', err);
+        // POST failed...
+    });
 });
 
 //----------------------
