@@ -111,6 +111,25 @@ router.post('/:id/newreview', (req, res) => {
     });
 });
 
+router.get('/:restuarant_id/:review_id', (req, res) => {
+  request1 = {
+    method: 'DELETE',
+    uri: 'https://crowdsommphp.herokuapp.com/api/reviews/'+req.params.review_id
+  };
+  rp(request1)
+    .then(function (parsedBody) {
+      console.log('success! i think.');
+        // POST succeeded...
+    })
+    .then(() => {
+      res.redirect('/')
+    })
+    .catch(function (err) {
+      console.log('error: ', err);
+        // POST failed...
+    });
+})
+
 //----------------------
 // Export
 //----------------------
