@@ -18,7 +18,12 @@
     </div>
   <% } else { %>
     <div>
-      <h4>No Reviews for <%=restaurant_name%> yet. </h4>
+      <h4>No Reviews for dishes at <%=restaurant_name%> yet. </h4>
+    </div>
+    <div>
+      <% if(user){%>
+        <a href="/restaurants/<%=restaurant_id%>/newreview">Add New Review</a>
+      <% } %>
     </div>
   <% } %>
   </body>

@@ -36,9 +36,8 @@ router.get('/:id', (req, res) => {
   //this is the search for the business in Yelp's API
   client.business(req.params.id)
     .then(response => {
-      console.log("2. ", response.jsonBody.name);
-      req.session.rest_name = response.jsonBody.name;
-      req.session.address1 = response.jsonBody.location.address1
+      console.log("2. ", response.jsonBody);
+      req.session.restaurant = response.jsonBody;
       //using the options from above, get the data from php backend
       rp({uri: 'https://crowdsommphp.herokuapp.com/api/reviews/restid/'+req.params.id, json: true}).then(function (repos) {
         console.log('repos: ', repos); // Print the responses
@@ -46,8 +45,9 @@ router.get('/:id', (req, res) => {
       }).then(() => {
         console.log('page loading now');
         res.render('restaurants/show.ejs', {
-          restaurant_name: req.session.rest_name,
-          restaurant_address: req.session.address1,
+          restaurant_name: req.session.restaurant.name,
+          restaurant_address: req.session.restaurant.location[0],
+          restaurant_id: req.session.restaurant.id,
           user: req.session.username,
           reviews: req.session.reviews
         })
@@ -57,22 +57,24 @@ router.get('/:id', (req, res) => {
     });
     console.log('6. reviews cookie: ', req.session.reviews);
 })
-//
-// .catch(e => {
-//   console.log("this is the error", e);
-// });
 
-router.get('/reviews/showall', (req, res) => {
-  request('http://localhost:8888/reviews', function (error, response, body) {
-    console.error('error:', error); // Print the error if one occurred
-    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    console.log('body:', body); // Print the HTML for the Google homepage.
-  });
-  res.render('restaurants/show.ejs', {
-    restaurant_name: "Kesslers",
-    restaurant_address: "Fake Address",
-    user: req.session.username
-  })
+router.get('/:id/newreview', (req, res) => {
+  req.session.restuarant_id = req.params.id;
+  client.business(req.params.id)
+    .then(response => {
+      console.log('yelp api call');
+      console.log("full response: ", response.jsonBody);
+      req.session.restuarant = response.jsonBody;
+    }).then(() => {
+      console.log('page loading now');
+      res.render('restaurants/newreview.ejs', {
+        restaurant_id: req.session.restuarant.id,
+        restaurant_name: req.session.restaurant.name,
+        user: req.session.username,
+      })
+    }).catch(e => {
+      console.log("this is the error: ", e);
+    });
 })
 
 //----------------------
