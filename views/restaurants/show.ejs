@@ -7,13 +7,19 @@
     <%- include ('../partials/nav.ejs') %>
     <h1> <%=restaurant_name%></h1>
     <h3> <%=restaurant_address%> </h3>
-    <div>
-    <% for(let i=0; i< reviews.length; i++){ %>
+    <% if(reviews[0]){ %>
       <div>
-        <h3><%=reviews[i].dish_name%> - <%=reviews[i].stars%> Stars</h3>
-        <p><%=reviews[i].review_text%></p>
-      </div>
-    <% } %>
-  </div>
+        <% for(let i=0; i< reviews.length; i++){ %>
+          <div>
+            <h3><%=reviews[i].dish_name%> - <%=reviews[i].stars%> Stars</h3>
+            <p><%=reviews[i].review_text%></p>
+          </div>
+        <% } %>
+    </div>
+  <% } else { %>
+    <div>
+      <h4>No Reviews for <%=restaurant_name%> yet. </h4>
+    </div>
+  <% } %>
   </body>
 </html>
