@@ -91,7 +91,7 @@ router.post('/:id/newreview', (req, res) => {
           restaurant_id: req.params.id,
           dish_name: req.body.dish_name,
           dish_id: 4, //we need to change this!!
-          stars: 5,
+          stars: req.body.stars,
           review_text: req.body.review_text
       },
       json: true // Automatically stringifies the body to JSON

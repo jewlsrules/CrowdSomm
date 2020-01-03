@@ -10,9 +10,15 @@
       <label for="dish_name">Dish Name:</label>
       <input type="text" name="dish_name" required/><br>
       <label for="stars">Stars: </label>
-      <input type="range" name="points" min="0" max="5" required /><br>
+      <select name='stars' required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select><br>
       <label for="review_text">Notes: </label>
-      <input type="text" name='review_text' placeholder="optionsl"/><br>
+      <input type="text" name='review_text' placeholder="optional"/><br>
       <input type="submit" value="Submit Review">
     </form>
   </body>
