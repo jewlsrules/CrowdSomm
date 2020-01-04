@@ -12,15 +12,11 @@
         <a href="/restaurants/<%=restaurant_id%>/newreview">Add New Review</a>
       <% } %>
     </div>
-    <% if(reviews[0]){ %>
+    <% if(averages[0]){ %>
       <div>
-        <% for(let i=0; i< reviews.length; i++){ %>
+        <% for(dish of averages){ %>
           <div>
-            <h3><%=reviews[i].dish_id%> - <%=reviews[i].dish_name%> - <%=reviews[i].stars%> Stars</h3>
-            <p><%=reviews[i].review_text%></p>
-            <% if(user && reviews[i].user_id === user._id){%>
-              <a href="/restaurants/<%=restaurant_id%>/<%=reviews[i].id%>">Delete Review</a>
-            <%}%>
+            <h3><%=dish.dish_name%> - <%=dish.avgStars%> Average Stars</h3>
           </div>
         <% } %>
     </div>

@@ -43,9 +43,11 @@ router.get('/:id', (req, res) => {
       rp({uri: 'https://crowdsommphp.herokuapp.com/api/reviews/restid/'+req.params.id, json: true}).then(function (repos) {
         // console.log('repos: ', repos); // Print the responses
         req.session.reviews = repos
+        // console.log('repos are here!', repos);
       }).then(() => {
         //this is getting just the rating and id so we can get the averages.
         let array1 = req.session.reviews;
+        array1.sort();
         let reviews_ratings = array1.map(item => {
           const container = {};
           container.dish_id = item.dish_id;
@@ -56,7 +58,7 @@ router.get('/:id', (req, res) => {
         console.log(reviews_ratings);
         let finals = [];
         let findaverages = () => {
-          let dish_name = reviews_ratings[0].dish_name;
+          let dish_name_tracker = reviews_ratings[0].dish_name;
           let total_sum = 0;
           let dish_id_tracker = reviews_ratings[0].dish_id;
           let counter = 0;
@@ -66,7 +68,10 @@ router.get('/:id', (req, res) => {
             if(i==(reviews_ratings.length-1)){
               total_sum += reviews_ratings[i].stars;
               counter++
+              dish_name_tracker = reviews_ratings[i].dish_name;
+              dish_id_tracker = reviews_ratings[i].dish_id
               const container1 = {};
+              container1.dish_name = dish_name_tracker;
               container1.dish_id = dish_id_tracker;
               container1.sum = total_sum;
               container1.counter = counter;
@@ -76,14 +81,16 @@ router.get('/:id', (req, res) => {
               total_sum = reviews_ratings[i].stars;
               counter = 1;
               console.log(i+'- last one!');
-              //if the dish ID doesn't match, create a new object with the information you have and push it into the finals array.
+              //if the ID matches a previous one, just increase the sum and counter.
             } else if(reviews_ratings[i].dish_id === dish_id_tracker){
               //add the star rating to the sum.
               console.log(i+' - review stars:'+ reviews_ratings[i].stars+' totalsum:'+total_sum+' counter='+counter);
               total_sum += reviews_ratings[i].stars;
               counter++
+              //if it's a new one,
             } else {
               const container1 = {};
+              container1.dish_name = dish_name_tracker;
               container1.dish_id = dish_id_tracker;
               container1.sum = total_sum;
               container1.counter = counter;
@@ -99,7 +106,9 @@ router.get('/:id', (req, res) => {
           }
         }
         //run the above function
-        findaverages();
+        if (reviews_ratings[0]) {
+          findaverages();
+        }
         // console.log('page loading now');
         // console.log('user cookie: ', req.session.user);
           res.render('restaurants/show.ejs', {
