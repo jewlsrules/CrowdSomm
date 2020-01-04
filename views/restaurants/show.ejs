@@ -17,6 +17,9 @@
         <% for(dish of averages){ %>
           <div>
             <h3><%=dish.dish_name%> - <%=dish.avgStars%> Average Stars</h3>
+            <%if(user){%>
+              <a href="/restaurants/<%=restaurant_id%>/<%=dish.dish_id%>">Review This Dish</a>
+            <%}%>
           </div>
         <% } %>
     </div>

@@ -5,7 +5,7 @@
   </head>
   <body>
     <%- include ('../partials/nav.ejs') %>
-    <h1> Add a new review for <%=restaurant_name%> </h1>
+    <h1> Add a new review for EXISTING DISH at <%=restaurant_name%> </h1>
     <form action="/restaurants/<%=restaurant_id%>/newreview" method="post">
       <label for="dish_name">Dish Name:</label>
       <input type="text" name="dish_name" required/><br>

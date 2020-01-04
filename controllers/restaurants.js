@@ -145,6 +145,24 @@ router.get('/:id/newreview', (req, res) => {
     });;
 }) // end of new review show page
 
+//show page for adding a new review on an existing dish
+router.get('/:restaurantid/:dishid', (req, res) => {
+  // req.session.restuarant_id = req.params.restaurantid;
+  // console.log(req.session);
+  rp({uri: 'https://crowdsommphp.herokuapp.com/api/reviews/restid/'+req.params.restuarantid, json: true}).then(function (repos) {
+    // console.log('repos: ', repos); // Print the responses
+    req.session.reviews = repos
+    // console.log('repos are here!', repos);
+  }).then(() => {
+    res.render('restaurants/review.ejs', {
+      restaurant_id: req.params.restaurantid,
+      restaurant_name: req.session.restaurant.name,
+      dish_id: req.params.dishid,
+      user: req.session.user,
+    })
+  })
+}) // end of new review show page
+
 let request1
 
 router.post('/:id/newreview', (req, res) => {
@@ -156,7 +174,7 @@ router.post('/:id/newreview', (req, res) => {
           user_id: req.session.user._id,
           restaurant_id: req.params.id,
           dish_name: req.body.dish_name,
-          dish_id: 4, //we need to change this!!
+          dish_id: 875, //we need to change this!!
           stars: req.body.stars,
           review_text: req.body.review_text
       },
