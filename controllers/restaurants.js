@@ -33,37 +33,87 @@ router.get('/', (req, res) => {
 //show individual restaurant page
 router.get('/:id', (req, res) => {
   req.session.restuarant_id = req.params.id
-  console.log('1. id: ', req.params.id);
+  // console.log('1. id: ', req.params.id);
   //this is the search for the business in Yelp's API
   client.business(req.params.id)
     .then(response => {
-      console.log("2. ", response.jsonBody);
+      // console.log("2. ", response.jsonBody);
       req.session.restaurant = response.jsonBody;
       //using the options from above, get the data from php backend
       rp({uri: 'https://crowdsommphp.herokuapp.com/api/reviews/restid/'+req.params.id, json: true}).then(function (repos) {
-        console.log('repos: ', repos); // Print the responses
+        // console.log('repos: ', repos); // Print the responses
         req.session.reviews = repos
       }).then(() => {
-        //set the user _id to "none" so we can compare it to reviews and see if we need to display the delete button
-        console.log('page loading now');
-        // if(!req.session.user){
-        //   req.session.user = {
-        //     _id: 'none'
-        //   }
-        // }
-        console.log('user cookie: ', req.session.user);
+        //this is getting just the rating and id so we can get the averages.
+        let array1 = req.session.reviews;
+        let reviews_ratings = array1.map(item => {
+          const container = {};
+          container.dish_id = item.dish_id;
+          container.stars = item.stars;
+          container.dish_name = item.dish_name
+          return container
+        })
+        console.log(reviews_ratings);
+        let finals = [];
+        let findaverages = () => {
+          let dish_name = reviews_ratings[0].dish_name;
+          let total_sum = 0;
+          let dish_id_tracker = reviews_ratings[0].dish_id;
+          let counter = 0;
+          for(let i = 0; i<(reviews_ratings.length); i++){
+            console.log(i+' - dish_id:'+ reviews_ratings[i].dish_id);
+            // if the dish_id matches the tracker, add the stars to the sum.
+            if(i==(reviews_ratings.length-1)){
+              total_sum += reviews_ratings[i].stars;
+              counter++
+              const container1 = {};
+              container1.dish_id = dish_id_tracker;
+              container1.sum = total_sum;
+              container1.counter = counter;
+              container1.avgStars = total_sum/counter;
+              finals.push(container1);
+              dish_id_tracker = reviews_ratings[i].dish_id;
+              total_sum = reviews_ratings[i].stars;
+              counter = 1;
+              console.log(i+'- last one!');
+              //if the dish ID doesn't match, create a new object with the information you have and push it into the finals array.
+            } else if(reviews_ratings[i].dish_id === dish_id_tracker){
+              //add the star rating to the sum.
+              console.log(i+' - review stars:'+ reviews_ratings[i].stars+' totalsum:'+total_sum+' counter='+counter);
+              total_sum += reviews_ratings[i].stars;
+              counter++
+            } else {
+              const container1 = {};
+              container1.dish_id = dish_id_tracker;
+              container1.sum = total_sum;
+              container1.counter = counter;
+              container1.avgStars = total_sum/counter;
+              finals.push(container1);
+              dish_id_tracker = reviews_ratings[i].dish_id;
+              total_sum = reviews_ratings[i].stars;
+              counter = 1;
+              console.log(i+' - no match!');
+              // console.log(finals);
+            }
+            console.log(finals);
+          }
+        }
+        //run the above function
+        findaverages();
+        // console.log('page loading now');
+        // console.log('user cookie: ', req.session.user);
           res.render('restaurants/show.ejs', {
             restaurant_name: req.session.restaurant.name,
             restaurant_address: req.session.restaurant.location[0],
             restaurant_id: req.session.restaurant.id,
             user: req.session.user,
-            reviews: req.session.reviews
+            reviews: req.session.reviews,
+            averages: finals
           })
       })
     }).catch(e => {
       console.log("this is the error: ", e);
     });
-    console.log('6. reviews cookie: ', req.session.reviews);
 }) // end of show individual restaurant
 
 //show page for adding a new review
