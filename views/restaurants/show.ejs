@@ -8,7 +8,7 @@
     <h1> <%=restaurant_name%></h1>
     <h3> <%=restaurant_address%> </h3>
     <div>
-      <% if(user._id !== "none"){%>
+      <% if(user){%>
         <a href="/restaurants/<%=restaurant_id%>/newreview">Add New Review</a>
       <% } %>
     </div>
@@ -18,7 +18,7 @@
           <div>
             <h3><%=reviews[i].dish_name%> - <%=reviews[i].stars%> Stars</h3>
             <p><%=reviews[i].review_text%></p>
-            <% if(reviews[i].user_id === user._id){%>
+            <% if(user && reviews[i].user_id === user._id){%>
               <a href="/restaurants/<%=restaurant_id%>/<%=reviews[i].id%>">Delete Review</a>
             <%}%>
           </div>

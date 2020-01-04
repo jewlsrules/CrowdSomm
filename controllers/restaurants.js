@@ -46,11 +46,11 @@ router.get('/:id', (req, res) => {
       }).then(() => {
         //set the user _id to "none" so we can compare it to reviews and see if we need to display the delete button
         console.log('page loading now');
-        if(!req.session.user){
-          req.session.user = {
-            _id: 'none'
-          }
-        }
+        // if(!req.session.user){
+        //   req.session.user = {
+        //     _id: 'none'
+        //   }
+        // }
         console.log('user cookie: ', req.session.user);
           res.render('restaurants/show.ejs', {
             restaurant_name: req.session.restaurant.name,
