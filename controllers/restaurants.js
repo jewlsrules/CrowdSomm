@@ -44,14 +44,21 @@ router.get('/:id', (req, res) => {
         console.log('repos: ', repos); // Print the responses
         req.session.reviews = repos
       }).then(() => {
+        //set the user _id to "none" so we can compare it to reviews and see if we need to display the delete button
         console.log('page loading now');
-        res.render('restaurants/show.ejs', {
-          restaurant_name: req.session.restaurant.name,
-          restaurant_address: req.session.restaurant.location[0],
-          restaurant_id: req.session.restaurant.id,
-          user: req.session.user,
-          reviews: req.session.reviews
-        })
+        if(!req.session.user){
+          req.session.user = {
+            _id: 'none'
+          }
+        }
+        console.log('user cookie: ', req.session.user);
+          res.render('restaurants/show.ejs', {
+            restaurant_name: req.session.restaurant.name,
+            restaurant_address: req.session.restaurant.location[0],
+            restaurant_id: req.session.restaurant.id,
+            user: req.session.user,
+            reviews: req.session.reviews
+          })
       })
     }).catch(e => {
       console.log("this is the error: ", e);
@@ -76,7 +83,7 @@ router.get('/:id/newreview', (req, res) => {
       })
     }).catch(e => {
       console.log("this is the error: ", e);
-    });
+    });;
 }) // end of new review show page
 
 let request1
@@ -105,9 +112,8 @@ router.post('/:id/newreview', (req, res) => {
     .then(() => {
       res.redirect('/restaurants/'+req.params.id)
     })
-    .catch(function (err) {
-      console.log('error: ', err);
-        // POST failed...
+    .catch(e => {
+      console.log("this is the error: ", e);
     });
 });
 
@@ -124,9 +130,8 @@ router.get('/:restuarant_id/:review_id', (req, res) => {
     .then(() => {
       res.redirect('/')
     })
-    .catch(function (err) {
-      console.log('error: ', err);
-        // POST failed...
+    .catch(e => {
+      console.log("this is the error: ", e);
     });
 })
 

@@ -8,7 +8,7 @@
     <h1> <%=restaurant_name%></h1>
     <h3> <%=restaurant_address%> </h3>
     <div>
-      <% if(user){%>
+      <% if(user._id !== "none"){%>
         <a href="/restaurants/<%=restaurant_id%>/newreview">Add New Review</a>
       <% } %>
     </div>
