@@ -5,19 +5,36 @@
   </head>
   <body>
     <%- include ('./partials/nav.ejs') %>
-    <form action="/search" method="POST">
-      <h3>Find a Restaurant: </h3>
-      <label for="restaurant_name">Name: </label>
-      <input type="text" name="restaurant_name" /><br>
-      <label for="restaurant_location">Zip or City, State:</label>
-      <input type="text" name="restaurant_location" /><br>
-      <input type="submit" value="SEARCH">
-    <br>
-    <% if(businesses){
-      for(let i=0; i < businesses.length; i++){ %>
-        <h3><a href='/restaurants/<%=businesses[i].id%>'><%=businesses[i].name%></a></h3><p><%=businesses[i].location.address1%></p>
-
-    <% }} %>
-    <%- include ('./partials/jquery.ejs') %>
+    <div class="container1">
+      <form action="/search" method="POST">
+        <h3>Find a Restaurant:</h3>
+        <div class="form-input-container">
+          <div class="form-group">
+            <label for="restaurant_name">Name:</label>
+            <div class="input-1">
+              <input type="text" class="form-control" name="restaurant_name" /><br>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="restaurant_location">Zip or City, State:</label>
+            <div class="input-1">
+              <input type="text" class="form-control" name="restaurant_location" /><br>
+            </div>
+          </div>
+          <input type="submit" value="SEARCH">
+        </div>
+      </form>
+      <br>
+      <% if(businesses){ %>
+        <div class='business-results-container'>
+        <% for(let i=0; i < businesses.length; i++){ %>
+          <div class="business-result">
+            <h3><a href='/restaurants/<%=businesses[i].id%>'><%=businesses[i].name%></a></h3><p><%=businesses[i].location.address1%></p>
+          </div>
+        <% } %>
+        </div>
+      <% } %>
+      <%- include ('./partials/jquery.ejs') %>
+    </div>
   </body>
 </html>
