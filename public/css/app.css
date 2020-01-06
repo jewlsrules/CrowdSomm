@@ -11,7 +11,7 @@
 }
 
 body {
-  background: var(--gray);
+  background: white;
   margin-top: 75px; /*to allow sticky header*/
   font-family: 'Inria Serif', serif;
 }
