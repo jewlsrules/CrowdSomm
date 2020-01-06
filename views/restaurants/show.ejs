@@ -10,6 +10,8 @@
     <div>
       <% if(user){%>
         <a href="/restaurants/<%=restaurant_id%>/newreview">Add New Review</a>
+      <% } else { %>
+        <p><a href='/users/login'>Log In</a> or <a href='/users/signup'>Sign Up</a> to leave a review</p>
       <% } %>
     </div>
     <% if(averages[0]){ %>

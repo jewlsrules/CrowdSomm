@@ -15,7 +15,9 @@ const base_url = 'https://crowdsommphp.herokuapp.com/api/'
 //----------------------
 //show sign up page
 router.get('/signup', (req, res) => {
-  res.render('users/signup.ejs')
+  res.render('users/signup.ejs', {
+    user: req.session.user
+  })
 }) // end of show sign up page
 
 // //create new user route

@@ -6,6 +6,11 @@
   <body>
     <%- include ('./partials/nav.ejs') %>
     <div class="container1">
+      <div class="subheader-container">
+        <div class='subheader'>
+          <h4>CrowdSomm collects reviews of individual dishes and drinks from your favorite restaurants to help others decide what to order.</h4>
+        </div>
+      </div>
       <form action="/search" method="POST">
         <h3>Find a Restaurant:</h3>
         <div class="form-input-container">
@@ -36,5 +41,6 @@
       <% } %>
       <%- include ('./partials/jquery.ejs') %>
     </div>
+    <%- include ('./partials/footer.ejs') %>
   </body>
 </html>
