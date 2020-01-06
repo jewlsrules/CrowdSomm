@@ -189,7 +189,7 @@ router.post('/newreview/:restaurantid/:dishid', (req, res) => {
           // POST succeeded...
       })
       .then(() => {
-        res.redirect('/restaurants/'+req.params.restuarantid)
+        res.redirect('/restaurants/'+req.params.restaurantid)
       })
       .catch(e => {
         console.log("this is the error: ", e);
