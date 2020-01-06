@@ -5,8 +5,10 @@
   </head>
   <body>
     <%- include ('../partials/nav.ejs') %>
-    <form action="/restaurants/newreview/<%=restaurant_id%>/<%=dish[0].id%>" method="post">
-      <h1> Add a new review for <span name='dish_name'><%= dish[0].dish_name %></span> at <%=restaurant_name%> </h1>
+    <h1> Add a new dish for <%=restaurant_name%> </h1>
+    <form action="/restaurants/<%=restaurant_id%>/newdish" method="post">
+      <label for="dish_name">Dish Name:</label>
+      <input type="text" name="dish_name" required/><br>
       <label for="stars">Stars: </label>
       <select name='stars' required>
         <option value="5">5</option>
@@ -17,7 +19,7 @@
       </select><br>
       <label for="review_text">Notes: </label>
       <input type="text" name='review_text' placeholder="optional"/><br>
-      <input type="submit" value="Submit Review">
+      <input type="submit" value="Submit New Dish">
     </form>
   </body>
 </html>
