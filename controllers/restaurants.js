@@ -66,6 +66,7 @@ router.get('/:id', (req, res) => {
               //once we've gone through all the items, display the page
               if(itemsProcessed === repos1.length){
                 // console.log('final avg', averages);
+                // console.log(req.session.restaurant);
                 res.render('restaurants/show.ejs', {
                   restaurant: req.session.restaurant,
                   user: req.session.user,

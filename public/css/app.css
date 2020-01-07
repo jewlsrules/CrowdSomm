@@ -128,6 +128,37 @@ body {
   color: var(--dark-red);
 }
 
+/* RESTAURANT SHOW PAGE */
+.all-ratings {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+.rating {
+  width: 70%;
+  background-color: var(--silver);
+  padding: 1em;
+  /* border: 1px solid var(--dark-gray); */
+  border-radius: 3px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  margin: 0 0 1em 0;
+  justify-content: center;
+  text-align: center;
+}
+
+.rating a {
+  color: var(--dark-red);
+}
+
+.stars {
+  color: var(--dark-red);
+}
+
 /* FOOTER */
 .footer {
   text-align: center;
