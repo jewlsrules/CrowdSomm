@@ -36,6 +36,7 @@ let repos1
 
 //show individual restaurant page
 router.get('/:id', (req, res) => {
+  let averages = []
   req.session.restuarant_id = req.params.id
   // console.log('1. id: ', req.params.id);
   //this is the search for the business in Yelp's API
@@ -46,32 +47,43 @@ router.get('/:id', (req, res) => {
       //using the options from above, get the data from php backend
       rp({uri: 'https://crowdsommphp.herokuapp.com/api/dishes/restid/'+req.params.id, json: true})
       .then(function (repos) {
-        if(!repos){
-          repos1 = 'no dishes'
-        } else {
           repos1 = repos
-        }
         console.log('repos are here!', repos1);
       })
       .then(() => {
-        let findAverages = (item) => {
-          // console.log(item.id);
-          rp({uri: 'https://crowdsommphp.herokuapp.com/api/reviews/dishid/averagestars/'+item.id, json: true})
-        .then(function (repos2) {
-          // console.log('repos2 ', repos2);
-        })
-        }
-        repos1.forEach(findAverages)
-      })
-      .then(() => {
-        // console.log('repos1 = ', repos1);
+        //if there are dishes already, get the averages
+        if(repos1[0]){
+          let itemsProcessed = 0;
+          repos1.forEach((item) => {
+            rp({uri: 'https://crowdsommphp.herokuapp.com/api/reviews/dishid/averagestars/'+item.id, json: true})
+            .then(function (repos2) {
+              itemsProcessed++
+              // console.log('repos2 ', repos2);
+              if(repos2.id !== 0){
+                averages.push(repos2);
+              }
+              // console.log('inner averages', averages);
+              if(itemsProcessed === repos1.length){
+                console.log('final avg', averages);
+                res.render('restaurants/show.ejs', {
+                  restaurant: req.session.restaurant,
+                  user: req.session.user,
+                  dishes: averages
+                })
+              }
+            })
+          })
+          //if not, just load the page without dishes.
+        } else {
           res.render('restaurants/show.ejs', {
             restaurant: req.session.restaurant,
             user: req.session.user,
-            dishes: repos1
+            dishes: null
           })
+        }
       })
-    }).catch(e => {
+    })
+    .catch(e => {
       console.log("this is the error: ", e);
     });
 }) // end of show individual restaurant
