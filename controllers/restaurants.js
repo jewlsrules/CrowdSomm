@@ -33,6 +33,17 @@ router.get('/', (req, res) => {
 }) // end of show sign up page
 
 let repos1
+let sortedavgs
+
+function compare(a, b){
+  let comparison = 0;
+  if(a.stars > b.stars){
+    comparison = -1;
+  } else if (a.stars < b.stars){
+    comparison = 1
+  }
+  return comparison
+}
 
 //show individual restaurant page
 router.get('/:id', (req, res) => {
@@ -55,6 +66,7 @@ router.get('/:id', (req, res) => {
         if(repos1[0]){
           let itemsProcessed = 0;
           repos1.forEach((item) => {
+            // console.log('for each item',item);
             rp({uri: 'https://crowdsommphp.herokuapp.com/api/reviews/dishid/averagestars/'+item.id, json: true})
             .then(function (repos2) {
               itemsProcessed++
@@ -65,7 +77,9 @@ router.get('/:id', (req, res) => {
               // console.log('inner averages', averages);
               //once we've gone through all the items, display the page
               if(itemsProcessed === repos1.length){
-                // console.log('final avg', averages);
+                averages.sort(compare);
+                console.log('final avg', averages);
+                console.log('sorted: ', sortedavgs);
                 // console.log(req.session.restaurant);
                 res.render('restaurants/show.ejs', {
                   restaurant: req.session.restaurant,
