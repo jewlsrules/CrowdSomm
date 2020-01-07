@@ -48,7 +48,7 @@ router.get('/:id', (req, res) => {
       rp({uri: 'https://crowdsommphp.herokuapp.com/api/dishes/restid/'+req.params.id, json: true})
       .then(function (repos) {
           repos1 = repos
-        console.log('repos are here!', repos1);
+        // console.log('repos are here!', repos1);
       })
       .then(() => {
         //if there are dishes already, get the averages
@@ -65,7 +65,7 @@ router.get('/:id', (req, res) => {
               // console.log('inner averages', averages);
               //once we've gone through all the items, display the page
               if(itemsProcessed === repos1.length){
-                console.log('final avg', averages);
+                // console.log('final avg', averages);
                 res.render('restaurants/show.ejs', {
                   restaurant: req.session.restaurant,
                   user: req.session.user,
@@ -94,11 +94,11 @@ router.get('/:id/newreview', (req, res) => {
   req.session.restuarant_id = req.params.id;
   client.business(req.params.id)
     .then(response => {
-      console.log('yelp api call');
-      console.log("full response: ", response.jsonBody);
+      // console.log('yelp api call');
+      // console.log("full response: ", response.jsonBody);
       req.session.restuarant = response.jsonBody;
     }).then(() => {
-      console.log('page loading now');
+      // console.log('page loading now');
       res.render('restaurants/newreview.ejs', {
         restaurant_id: req.session.restuarant.id,
         restaurant_name: req.session.restaurant.name,
@@ -114,11 +114,11 @@ router.get('/:restaurantid/newdish', (req, res) => {
   // req.session.restuarant_id = req.params.restaurantid;
   client.business(req.params.restaurantid)
     .then(response => {
-      console.log('yelp api call');
-      console.log("full response: ", response.jsonBody);
+      // console.log('yelp api call');
+      // console.log("full response: ", response.jsonBody);
       req.session.restuarant = response.jsonBody;
     }).then(() => {
-      console.log('page loading now');
+      // console.log('page loading now');
       res.render('restaurants/newdish.ejs', {
         restaurant_id: req.params.restaurantid,
         restaurant_name: req.session.restaurant.name,
@@ -128,6 +128,8 @@ router.get('/:restaurantid/newdish', (req, res) => {
       console.log("this is the error: ", e);
     });
 }) // end of new review show page
+
+let new_dish_id;
 
 router.post('/:id/newdish', (req, res) => {
   console.log(req.body); //this returns an object based on the names of the inputs
@@ -142,12 +144,39 @@ router.post('/:id/newdish', (req, res) => {
   };
   console.log(request1);
   rp(request1)
-    .then(function (parsedBody) {
+    .then(function(response) {
       console.log('success! i think.');
+      console.log('push response: ', response);
+      new_dish_id = response.id
+      console.log('new dish id: ', new_dish_id);
     })
     .then(() => {
-      res.redirect('/restaurants/'+req.params.id)
+      let reviewRequest = {
+        method: 'POST',
+        uri: 'https://crowdsommphp.herokuapp.com/api/reviews',
+        body: {
+            user_id: req.session.user._id,
+            restaurant_id: req.params.id,
+            dish_name: req.body.dish_name,
+            dish_id: new_dish_id,
+            stars: req.body.stars,
+            review_text: req.body.review_text
+        },
+        json: true // Automatically stringifies the body to JSON
+      }
+      console.log('review request: ', reviewRequest);
+      rp(reviewRequest)
+      .then(function(response2) {
+        console.log('success on second request! i think.');
+        console.log('second response: ', response2);
+      })
+      .catch(e2 => {
+        console.log("this is the error for part 2: ", e2);
+      })
     })
+    .then(()=>{
+      res.redirect('/restaurants/'+req.params.id)
+      })
     .catch(e => {
       console.log("this is the error: ", e);
     });
