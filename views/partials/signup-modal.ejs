@@ -1,9 +1,14 @@
 <div class="popup-wrapper">
   <div id='popup-container'>
-    <p><a herf="javascript:void(0)" onclick="toggle_visibility('contact-popup');">X</a></p>
-    <h2>Create New User</h2>
-
-    <form action= '/users' method="post">
+    <h2>Sign Up</h2>
+    <p><a class='pointer' herf="javascript:void(0)" onclick="toggle_signup('contact-popup')">
+      <svg class="bi bi-x-circle" width="1.5em" height="1.5em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M10 17a7 7 0 100-14 7 7 0 000 14zm0 1a8 8 0 100-16 8 8 0 000 16z" clip-rule="evenodd"/>
+        <path fill-rule="evenodd" d="M12.646 13.354l-6-6 .708-.708 6 6-.708.708z" clip-rule="evenodd"/>
+        <path fill-rule="evenodd" d="M7.354 13.354l6-6-.708-.708-6 6 .708.708z" clip-rule="evenodd"/>
+      </svg>
+    </a></p>
+    <form class='loginsignup' action= '/users' method="post">
       <label for="name">Full Name:</label><br>
       <input type="text" name="name" ><br>
       <label for="email">Email:</label><br>
@@ -12,8 +17,7 @@
       <input type="text" name="username" ><br>
       <label for="password">Password</label><br>
       <input type="password" name="password"><br>
-      <input type="submit"value="Create New User">
-
+      <input class='submit' type="submit"value="Create New User">
     </form>
   </div>
 </div>

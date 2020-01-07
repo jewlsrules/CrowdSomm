@@ -192,6 +192,23 @@ body {
     border-radius: 10px;
     width: 300px;
     margin: 70px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#popup-container h2 {
+  width: 90%;
+}
+
+.loginsignup input[type=submit] {
+  margin-top: 1em;
+}
+
+.pointer:hover{
+  cursor: pointer;
+  align-self: flex-end;
 }
 
 /* FOOTER */

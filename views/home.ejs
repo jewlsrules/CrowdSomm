@@ -45,12 +45,31 @@
     //Modal Popup Controller
       function toggle_visibility(){
           var e = document.getElementById('popup');
-
-      if(e.style.display == 'block')
-          e.style.display = 'none';
-      else
+          var f = document.getElementById('popup-signup');
+        if(f.style.display == 'block'){
           e.style.display = 'block';
+          f.style.display = 'none';
+        } else if(e.style.display == 'block'){
+            e.style.display = 'none';
+        } else {
+            e.style.display = 'block';
+          }
       }
+
+      //Modal Popup Controller
+        function toggle_signup(){
+          var e = document.getElementById('popup-signup');
+          var f = document.getElementById('popup');
+          if(f.style.display == 'block'){
+            e.style.display = 'block';
+            f.style.display = 'none';
+          }
+          else if(e.style.display == 'block'){
+            e.style.display = 'none';
+          } else {
+            e.style.display = 'block';
+          }
+        }
     </script>
   </body>
 </html>
