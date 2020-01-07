@@ -1,3 +1,9 @@
+<div class="popup-position" id="popup">
+    <%- include('./modal.ejs'); %>
+</div>
+<div class="popup-position" id="popup-signup">
+    <%- include('./signup-modal.ejs'); %>
+</div>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark nav-red">
   <img id='nav-logo' src='https://cdn2.iconfinder.com/data/icons/fitness-health-and-diet/32/health_fitness_15-512.png'><a class="navbar-brand" href="/">CrowdSomm</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,8 +15,8 @@
       <a class="nav-item nav-link active" href="/">Hi, <%= user.username %>! <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link active" href="/">HOME <span class="sr-only">(current)</span></a>
       <% } else { %>
-        <a class="nav-item nav-link" href="/users/login">Log In</a>
-        <a class="nav-item nav-link" href="/users/signup">Sign Up</a>
+        <a class="nav-item nav-link" href="#" onclick='toggle_visibility()'>Log In</a>
+        <a class="nav-item nav-link" href="#" onclick='toggle_signup()'>Sign Up</a>
       <% }%>
     </div>
   </div>

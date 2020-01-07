@@ -15,7 +15,7 @@
         <% if(user){%>
           <a href="/restaurants/<%=restaurant.id%>/newdish">Add a New Dish</a>
         <% } else { %>
-          <p><a href='/users/login'>Log In</a> or <a href='/users/signup'>Sign Up</a> to leave a review</p>
+          <p><a href='#' onclick='toggle_visibility()'>Log In</a> or <a href='/users/signup'>Sign Up</a> to leave a review</p>
         <% } %>
         <div class='all-ratings'>
         <% if(!dishes){ %>
@@ -59,6 +59,24 @@
       $($parent.children[2]).load('/restaurants/reviews/'+this.id)
     })
 
+    //Modal Popup Controller
+      function toggle_visibility(){
+          var e = document.getElementById('popup');
+
+      if(e.style.display == 'block')
+          e.style.display = 'none';
+      else
+          e.style.display = 'block';
+      }
+
+      //Modal Popup Controller
+        function toggle_signup(){
+          var e = document.getElementById('popup-signup');
+          if(e.style.display == 'block')
+            e.style.display = 'none';
+          else
+            e.style.display = 'block';
+        }
 
     </script>
         <%- include ('../partials/footer.ejs') %>

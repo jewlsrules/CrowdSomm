@@ -41,5 +41,16 @@
       <% } %>
     </div>
     <%- include ('./partials/footer.ejs') %>
+    <script>
+    //Modal Popup Controller
+      function toggle_visibility(){
+          var e = document.getElementById('popup');
+
+      if(e.style.display == 'block')
+          e.style.display = 'none';
+      else
+          e.style.display = 'block';
+      }
+    </script>
   </body>
 </html>
