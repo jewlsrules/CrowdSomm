@@ -50,7 +50,8 @@
 
     $('.show-reviews').on('click', function(){
       $parent = $(this).parents()[0]
-      console.log($parent.children[3]);
+      console.log(this);
+      console.log('parent: ', $parent);
       $($parent.children[3], this).toggle();
       $($parent.children[3]).load('/restaurants/reviews/'+this.id)
     })
