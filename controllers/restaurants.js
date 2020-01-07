@@ -63,6 +63,7 @@ router.get('/:id', (req, res) => {
                 averages.push(repos2);
               }
               // console.log('inner averages', averages);
+              //once we've gone through all the items, display the page
               if(itemsProcessed === repos1.length){
                 console.log('final avg', averages);
                 res.render('restaurants/show.ejs', {
