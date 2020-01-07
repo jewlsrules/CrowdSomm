@@ -63,6 +63,9 @@ app.use(express.json());// returns middleware that only parses JSON  - THIS IS F
 //use method override
 app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
+
+
 // //----------------------
 // // Controllers
 // //----------------------
@@ -122,6 +125,11 @@ app.get('/' , (req, res) => {
       console.log(e);
     });
   }
+});
+
+//test for toggle view
+app.get('/content2', function (req, res) {
+    res.render('partials/content2.ejs');
 });
 
 //----------------------

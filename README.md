@@ -15,6 +15,7 @@ CrowdSomm aims to get feedback from restaurant patrons about the dishes and drin
 - Yelp API - https://github.com/tonybadguy/yelp-fusion
 - Request Node Module - https://github.com/request/request
 - Request Promise by BlueBird - https://github.com/request/request-promise
+- JSDOM - https://github.com/jsdom/jsdom
 
 ## Approach
 

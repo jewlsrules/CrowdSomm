@@ -159,6 +159,14 @@ body {
   color: var(--dark-red);
 }
 
+.myDIV {
+  display: none;
+}
+
+.showMyDIV {
+  display: block;
+}
+
 /* FOOTER */
 .footer {
   text-align: center;

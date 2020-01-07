@@ -12,8 +12,15 @@ const yelp = require('yelp-fusion'); //for the yelp API to get businesses listed
 const base_url = 'https://crowdsommphp.herokuapp.com/api/';
 const request = require('request');
 var rp = require('request-promise');
+const javascript_file = require('../public/javascript/scripts.js')
 
-require('dotenv').config()
+var jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { window } = new JSDOM();
+const { document } = (new JSDOM('')).window;
+global.document = document;
+
+var $ = jQuery = require('jquery')(window);
 
 //----------------------
 // Routes
@@ -43,6 +50,15 @@ function compare(a, b){
     comparison = 1
   }
   return comparison
+}
+
+let toggleShow = () => {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
 }
 
 //show individual restaurant page
@@ -78,13 +94,13 @@ router.get('/:id', (req, res) => {
               //once we've gone through all the items, display the page
               if(itemsProcessed === repos1.length){
                 averages.sort(compare);
-                console.log('final avg', averages);
-                console.log('sorted: ', sortedavgs);
+                // console.log('final avg', averages);
+                // console.log('sorted: ', sortedavgs);
                 // console.log(req.session.restaurant);
                 res.render('restaurants/show.ejs', {
                   restaurant: req.session.restaurant,
                   user: req.session.user,
-                  dishes: averages
+                  dishes: averages,
                 })
               }
             })
@@ -103,6 +119,18 @@ router.get('/:id', (req, res) => {
       console.log("this is the error: ", e);
     });
 }) // end of show individual restaurant
+
+//show the reviews on toggle click
+router.get('/reviews/:dishid', function (req, res) {
+  // console.log('getting review for ', req.params.dishid);
+  rp({uri: 'https://crowdsommphp.herokuapp.com/api/reviews/dishid/alldetails/'+req.params.dishid, json: true})
+  .then(function (response) {
+      console.log('show reviews: ', response);
+      res.render('partials/reviews.ejs', {
+        reviews: response
+      })
+  })
+});
 
 //show page for adding a new review
 router.get('/:id/newreview', (req, res) => {
