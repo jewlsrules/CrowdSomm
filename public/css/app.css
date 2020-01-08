@@ -193,10 +193,31 @@ a:hover {
   color: var(--dark-red);
   align-self: center;
   font-size: 25px;
+  justify-content: center;
+  align-items: center;
 }
 
 .star-div {
   margin-bottom: 1em;
+}
+
+.stars2 {
+  padding-left: .5em;
+}
+
+.individual-review {
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--silver);
+  padding: .5em 0 .5em 0;
+}
+
+.individual-review * {
+  margin: 0;
 }
 
 .myDIV {

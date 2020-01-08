@@ -5,6 +5,9 @@
   </head>
   <body>
     <%- include ('../partials/nav.ejs') %>
+    <div class="popup-position" id="popup-newdish">
+        <%- include('../partials/createdish.ejs'); %>
+    </div>
     <div class="container1">
       <div class="subheader-container">
         <div class="subheader">
@@ -13,7 +16,7 @@
         </div>
       </div>
         <% if(user){%>
-          <a href="/restaurants/<%=restaurant.id%>/newdish">Add a New Dish</a>
+          <a href="#" onclick='toggle_newdish()'>Add a New Dish</a>
         <% } else { %>
           <p><a href='#' onclick='toggle_visibility()'>Log In</a> or <a href='#' onclick='toggle_signup()'>Sign Up</a> to leave a review</p>
         <% } %>
@@ -64,23 +67,49 @@
     })
 
     //Modal Popup Controller
-      function toggle_visibility(){
-          var e = document.getElementById('popup');
-
-      if(e.style.display == 'block')
+    function toggle_visibility(){
+        var e = document.getElementById('popup');
+        var f = document.getElementById('popup-signup');
+      if(f.style.display == 'block'){
+        e.style.display = 'block';
+        f.style.display = 'none';
+      } else if(e.style.display == 'block'){
           e.style.display = 'none';
-      else
+      } else {
           e.style.display = 'block';
+        }
+    }
+
+    //Modal Popup Controller
+      function toggle_signup(){
+        var e = document.getElementById('popup-signup');
+        var f = document.getElementById('popup');
+        if(f.style.display == 'block'){
+          e.style.display = 'block';
+          f.style.display = 'none';
+        }
+        else if(e.style.display == 'block'){
+          e.style.display = 'none';
+        } else {
+          e.style.display = 'block';
+        }
       }
 
-      //Modal Popup Controller
-        function toggle_signup(){
-          var e = document.getElementById('popup-signup');
-          if(e.style.display == 'block')
-            e.style.display = 'none';
-          else
-            e.style.display = 'block';
+      function toggle_newdish(){
+        var e = document.getElementById('popup-newdish');
+        var f = document.getElementById('popup');
+        var g = document.getElementById('popup-signup');
+        if(f.style.display == 'block'){
+          e.style.display = 'block';
+          f.style.display = 'none';
+          g.style.display = 'none';
         }
+        else if(e.style.display == 'block'){
+          e.style.display = 'none';
+        } else {
+          e.style.display = 'block';
+        }
+      }
 
     </script>
         <%- include ('../partials/footer.ejs') %>
