@@ -22,6 +22,14 @@ body {
     position: relative;
 }
 
+a {
+  color: var(--dark-red)
+}
+
+a:hover {
+  color: var(--dark-red)
+}
+
 /* NAVBAR */
 
 .nav-red {
@@ -71,7 +79,7 @@ body {
 .form-input-container {
   background: var(--dark-red);
   color: var(--white);
-  /* border: 1px solid black; */
+  /* border: 5px solid black; */
   border-radius: 3px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
   padding: 1em;
@@ -100,6 +108,7 @@ body {
   /* background-color: black; */
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   margin: 2em 0 2em 0;
@@ -107,11 +116,12 @@ body {
 
 .business-result {
   width: 30%;
+  min-width: 300px;
   height: 150px;
   border: 5px solid var(--dark-red);
   border-radius: 3px;
   background: var(--white);
-  margin: 0 0 1em 0;
+  margin: .6em;
   padding: .2em;
   display: flex;
   flex-direction: column;
@@ -126,6 +136,22 @@ body {
 
 .business-result a:hover {
   color: var(--dark-red);
+}
+
+.popular-container {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
+}
+
+.popular-header {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid black;
 }
 
 /* RESTAURANT SHOW PAGE */
@@ -155,8 +181,22 @@ body {
   color: var(--dark-red);
 }
 
+/* .dish-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+} */
+
 .stars {
   color: var(--dark-red);
+  align-self: center;
+  font-size: 25px;
+}
+
+.star-div {
+  margin-bottom: 1em;
 }
 
 .myDIV {

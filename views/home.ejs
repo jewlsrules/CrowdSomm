@@ -12,7 +12,7 @@
         </div>
       </div>
       <form action="/search" method="POST">
-        <h3>Find a Restaurant:</h3>
+        <h2>Find a Restaurant:</h2>
         <div class="form-input-container">
           <div class="form-group">
             <label for="restaurant_name">Name:</label>
@@ -38,7 +38,25 @@
           </div>
         <% } %>
         </div>
+      <% } else { %>
+        <div class="popular-container">
+          <div class="popular-header">
+            <h1>Popular Restaurants</h1>
+          </div>
+          <div class='business-results-container'>
+            <div class="business-result">
+              <h3><a href='/restaurants/90Kr1hSW3Vku9g4yfQIBgQ'>Kessler's Sports Bar</a></h3><p>1703 E Olive Way</p>
+            </div>
+            <div class="business-result">
+              <h3><a href='/restaurants/KWR8Qb-43BZv016WlpnQ9w'>Feierabend</a></h3><p>422 Yale Ave N</p>
+            </div>
+            <div class="business-result">
+              <h3><a href='/restaurants/pq9CH9VxSaLZUqqpb8GNzw'>Shannon's on Pine</a></h3><p>209 Pine Ave</p>
+            </div>
+          </div>
+        </div>
       <% } %>
+
     </div>
     <%- include ('./partials/footer.ejs') %>
     <script>
