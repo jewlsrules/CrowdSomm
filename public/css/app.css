@@ -272,6 +272,16 @@ a:hover {
   align-self: flex-end;
 }
 
+.modal-form * {
+  margin: 5px;
+}
+
+.modal-form input[type=submit] {
+  background: var(--dark-red);
+  color: white;
+  font-size: 1.2em;
+}
+
 /* FOOTER */
 .footer {
   text-align: center;

@@ -1,16 +1,14 @@
 <div class="popup-wrapper">
   <div id='popup-container'>
-    <h2>Add Dish</h2>
-    <p><a class='pointer' herf="javascript:void(0)" onclick="toggle_newdish()">
+    <h2><%=dish.dish_name%></h2>
+    <p><a class='pointer' herf="javascript:void(0)" onclick="toggle_newreview(<%=dish.dish_id%>)">
       <svg class="bi bi-x-circle" width="1.5em" height="1.5em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M10 17a7 7 0 100-14 7 7 0 000 14zm0 1a8 8 0 100-16 8 8 0 000 16z" clip-rule="evenodd"/>
         <path fill-rule="evenodd" d="M12.646 13.354l-6-6 .708-.708 6 6-.708.708z" clip-rule="evenodd"/>
         <path fill-rule="evenodd" d="M7.354 13.354l6-6-.708-.708-6 6 .708.708z" clip-rule="evenodd"/>
       </svg>
     </a></p>
-    <form class='modal-form' action="/restaurants/<%=restaurant.id%>/newdish" method="post">
-      <label for="dish_name">Dish Name:</label>
-      <input type="text" name="dish_name" required/><br>
+    <form action="/restaurants/newreview/<%=restaurant.id%>/<%=dish.dish_id%>" method="post">
       <label for="stars">Stars: </label>
       <select name='stars' required>
         <option value="5">5</option>
@@ -19,9 +17,9 @@
         <option value="2">2</option>
         <option value="1">1</option>
       </select><br>
-      <label for="review_text">Notes: </label><br>
+      <label for="review_text">Notes: </label>
       <input type="text" name='review_text' placeholder="optional"/><br>
-      <input type="submit" value="Submit New Dish">
+      <input type="submit" value="Submit Review">
     </form>
   </div>
 </div>

@@ -25,6 +25,9 @@
           <p>This restaurant doesn't have any dishes to review yet.</p>
         <% } else { %>
           <% for(dish of dishes){ %>
+            <div class="popup-position" id="<%=dish.dish_id%>">
+                <%- include('../partials/existingdish.ejs'); %>
+            </div>
             <div class='rating'>
               <div class='main-dish-info'>
                 <div class="dish-header">
@@ -42,7 +45,7 @@
                   <%}%></span></div>
                 </div>
                 <% if(user){ %>
-                  <a href='/restaurants/<%=restaurant.id%>/<%=dish.dish_id%>'>Review this Dish</a>
+                  <a href='#' onclick='toggle_newreview(<%=dish.dish_id%>)'>Review this Dish</a>
                 <% } %>
               </div>
               <p class='show-reviews' id='<%=dish.dish_id%>'>Show/Hide Reviews</p>
@@ -108,6 +111,23 @@
           e.style.display = 'none';
         } else {
           e.style.display = 'block';
+        }
+      }
+
+      function toggle_newreview(id){
+        var d = document.getElementById(id)
+        var e = document.getElementById('popup-newdish');
+        var f = document.getElementById('popup');
+        var g = document.getElementById('popup-signup');
+        if(f.style.display == 'block'){
+          d.style.display = 'block';
+          f.style.display = 'none';
+          g.style.display = 'none';
+        }
+        else if(d.style.display == 'block'){
+          d.style.display = 'none';
+        } else {
+          d.style.display = 'block';
         }
       }
 
