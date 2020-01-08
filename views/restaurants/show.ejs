@@ -15,7 +15,7 @@
         <% if(user){%>
           <a href="/restaurants/<%=restaurant.id%>/newdish">Add a New Dish</a>
         <% } else { %>
-          <p><a href='#' onclick='toggle_visibility()'>Log In</a> or <a href='/users/signup'>Sign Up</a> to leave a review</p>
+          <p><a href='#' onclick='toggle_visibility()'>Log In</a> or <a href='#' onclick='toggle_signup()'>Sign Up</a> to leave a review</p>
         <% } %>
         <div class='all-ratings'>
         <% if(!dishes){ %>
