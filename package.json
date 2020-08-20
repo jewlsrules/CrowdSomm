@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/jewlsrules/CrowdSomm#readme",
   "dependencies": {
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "bootstrap-icons": "^1.0.0-alpha2",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
